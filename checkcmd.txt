@@ -4,3 +4,15 @@ Get-NetFirewallProfile
 Windows Defender profile check cmd
 Get-MpComputerStatus
   =============================
+service check
+Get-Service SecurityHealthService
+=================
+all litsining port
+netstat -ano | findstr LISTENING
+=====================
+Which program which port used 
+tasklist | findstr 888
+===============
+Port litsining
+Get-NetTCPConnection -State Listen
+======================
