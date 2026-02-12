@@ -1,0 +1,16 @@
+$subnet = "192.168.0."
+$ports = @(135, 139, 445, 3389)
+1..254 | ForEach-Object {
+    $ip = $subnet + $_
+    if(Test-Connection -ComputerName $ip -Count 1 -Quiet){
+        Write-Host "`n$ip is alive:"
+        foreach($port in $ports){
+            $result = Test-NetConnection -ComputerName $ip -Port $port
+            if($result.TcpTestSucceeded){
+                Write-Host "  Port $port is OPEN"
+            } else {
+                Write-Host "  Port $port is CLOSED"
+            }
+        }
+    }
+}
