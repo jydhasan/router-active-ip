@@ -1,0 +1,6 @@
+FireWall profile check cmd
+Get-NetFirewallProfile
+  ==============
+Windows Defender profile check cmd
+Get-MpComputerStatus
+  =============================
