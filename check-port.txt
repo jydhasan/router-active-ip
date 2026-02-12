@@ -1,0 +1,7 @@
+$ports = @(135, 139, 445, 3389)  # common Windows ports
+foreach($port in $ports){
+    $result = Test-NetConnection -ComputerName 192.168.0.102 -Port $port
+    if($result.TcpTestSucceeded){
+        Write-Host "Port $port is OPEN on 192.168.0.102"
+    }
+}
