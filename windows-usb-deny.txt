@@ -1,0 +1,160 @@
+Win + R → gpedit.msc
+and 
+==============
+Computer Configuration →
+Administrative Templates →
+System →
+Removable Storage Access
+-----------
+All Removable Storage classes: Deny all access
+Apply → Restart
+
+দারুণ 😎 তুমি যেহেতু **Windows 10 Pro** ব্যবহার করো, তাহলে ব্যাংকের মতো অনেক restriction তুমি নিজেই করতে পারবে — কারণ Pro version-এ:
+
+* ✅ Local Group Policy Editor আছে
+* ✅ BitLocker আছে
+* ✅ Advanced Firewall আছে
+* ✅ Domain join support আছে
+
+এখন আমি দেখাই কী কী করতে পারো 👇
+
+---
+
+# 🔒 1️⃣ Pendrive (USB) পুরো block করা
+
+### Step:
+
+```
+Win + R → gpedit.msc
+```
+
+তারপর যাও:
+
+```
+Computer Configuration →
+Administrative Templates →
+System →
+Removable Storage Access
+```
+
+Enable করো:
+
+* **All Removable Storage classes: Deny all access**
+
+Apply → Restart
+
+👉 এখন কোনো pendrive কাজ করবে না 🔥
+
+---
+
+# 🌐 2️⃣ Specific Website ছাড়া সব block করা
+
+## Method A: Windows Firewall দিয়ে (Basic)
+
+Advanced firewall →
+Outbound rule →
+Block all HTTP/HTTPS
+
+তারপর Allow rule তৈরি করো specific IP এর জন্য।
+
+(এটা একটু advanced)
+
+---
+
+## Method B: Hosts file দিয়ে (Simple)
+
+```
+C:\Windows\System32\drivers\etc\hosts
+```
+
+Edit করে unwanted site redirect করো:
+
+```
+127.0.0.1 facebook.com
+127.0.0.1 youtube.com
+```
+
+---
+
+## Method C (Best): Parental Control / DNS Filtering
+
+Router level DNS filtering করলে পুরো network block করা যায়।
+
+---
+
+# 🔐 3️⃣ Software Install Block
+
+```
+gpedit.msc →
+Computer Configuration →
+Windows Settings →
+Security Settings →
+Application Control Policies →
+AppLocker
+```
+
+এখানে:
+
+* Only allow specific apps
+* Block .exe install
+
+ব্যাংকগুলো এটা ব্যবহার করে 🔥
+
+---
+
+# 🚫 4️⃣ Control Panel block
+
+```
+User Configuration →
+Administrative Templates →
+Control Panel →
+Prohibit access to Control Panel
+```
+
+Enable করো।
+
+---
+
+# 🛡️ 5️⃣ Account Lockout (Brute Force Protection)
+
+```
+Local Security Policy (secpol.msc) →
+Account Policies →
+Account Lockout Policy
+```
+
+Set করো:
+
+* 3 invalid attempts
+* Lockout 30 minutes
+
+---
+
+# 💎 6️⃣ BitLocker (Data Protection)
+
+```
+Control Panel → BitLocker Drive Encryption
+```
+
+Enable করলে:
+
+* Laptop চুরি হলেও data পড়া যাবে না 🔥
+
+---
+
+# 🎯 তুমি Pro দিয়ে করতে পারো:
+
+✔ USB disable
+✔ Website restrict
+✔ App install block
+✔ Firewall strict
+✔ Admin privilege remove
+✔ Data encryption
+
+---
+
+যদি চাও আমি তোমার জন্য একটা
+🔥 “Mini Bank Style Lockdown Configuration”
+step-by-step বানিয়ে দেই (safe + practical)।
+
+চাও কি? 😎
