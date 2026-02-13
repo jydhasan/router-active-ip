@@ -5,3 +5,15 @@ foreach($port in $ports){
         Write-Host "Port $port is OPEN on 192.168.0.102"
     }
 }
+
+------------------------------
+all port scan 1 to 1024
+1..1024 | ForEach-Object {
+    $tcp = New-Object System.Net.Sockets.TcpClient
+    $connect = $tcp.BeginConnect("192.168.0.103", $_, $null, $null)
+    $wait = $connect.AsyncWaitHandle.WaitOne(100, $false)
+    if ($wait -and !$tcp.Client.Connected -eq $false) {
+        Write-Host "Port $_ is OPEN" -ForegroundColor Green
+    }
+    $tcp.Close()
+}
