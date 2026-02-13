@@ -1,0 +1,63 @@
+C:\Users\zahid\AppData\Local\Android\Sdk\platform-tools>doskey /history
+ls
+dir
+adb version
+adb pair 192.168.0.103:066810
+adb pair 192.168.0.103
+adb devices
+adb disconnect 192.168.0.103:37271
+adb kill-server
+adb start-server
+adb pair 192.168.0.103:372721
+adb pair 192.168.0.103:37271
+adb pair 192.168.0.103:45109
+adb shell getprop ro.product.model
+adb shell getprop ro.build.version.release
+adb shell pm list packages
+adb shell ps
+adb shell dumpsys battery
+adb shell screencap /sdcard/test.png
+adb pull /sdcard/test.png
+adb shell ls /sdcard/
+adb shell ls /sdcard/DCIM/
+doskey /history
+
+C:\Users\zahid\AppData\Local\Android\Sdk\platform-tools>
+-----------------------------------
+Router all device connected list
+arp -a
+-------------------
+
+adb pair 192.168.0.103:PAIRING_PORT
+adb pair 192.168.0.103:37009
+adb pair 192.168.0.103:372721
+
+----------------------
+ami direct connect o korte pari
+first port find korte hobe
+nmap -A -p 1-65535 192.168.0.103
+then 
+adb connect 192.168.0.103:44651
+--------------------------
+
+all apps showing list
+---------------------------------
+# Phone model দেখো
+adb shell getprop ro.product.model
+
+# Android version দেখো
+adb shell getprop ro.build.version.release
+
+# Installed apps দেখো
+adb shell pm list packages
+
+# Running processes দেখো
+adb shell ps
+
+# Battery status
+adb shell dumpsys battery
+--------------------------------------
+C:\Users\zahid\AppData\Local\Android\Sdk\platform-tools>adb pull -a /sdcard/Download/ C:\Users\zahid\Desktop\backup
+/sdcard/Download/: 42 files pulled, 0 skipped. 1.7 MB/s (59312120 bytes in 33.645s)
+
+C:\Users\zahid\AppData\Local\Android\Sdk\platform-tools>
