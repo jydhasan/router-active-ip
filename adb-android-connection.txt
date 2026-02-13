@@ -38,6 +38,9 @@ first port find korte hobe
 nmap -A -p 1-65535 192.168.0.103
 then 
 adb connect 192.168.0.103:44651
+then 
+adb -s 192.168.0.103:37537 shell , specific device connection
+then adb shell
 --------------------------
 
 all apps showing list
