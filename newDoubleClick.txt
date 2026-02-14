@@ -1,0 +1,57 @@
+@echo off
+:: Self-elevate if not running as admin
+net session >nul 2>&1
+if %errorLevel% NEQ 0 (
+    echo Requesting administrative privileges...
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
+    exit /b
+)
+
+:: =========================
+:: Install OpenSSH Server if needed
+:: =========================
+echo Installing OpenSSH Server (if needed)...
+powershell -Command "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0 -ErrorAction SilentlyContinue"
+
+:: Wait a few seconds to ensure install finishes
+timeout /t 5 /nobreak >nul
+
+:: =========================
+:: Start SSH service
+:: =========================
+echo Starting SSH service...
+powershell -Command "Start-Service sshd"
+
+:: Wait a few seconds to ensure service fully starts
+timeout /t 2 /nobreak >nul
+
+echo Setting SSH service to Automatic startup...
+powershell -Command "Set-Service -Name sshd -StartupType Automatic"
+
+:: =========================
+:: Configure Firewall
+:: =========================
+echo Configuring Firewall...
+powershell -Command "New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -ErrorAction SilentlyContinue"
+
+:: =========================
+:: Create user if not exists
+:: =========================
+net user sshuser >nul 2>&1
+if %errorLevel% NEQ 0 (
+    echo Creating sshuser...
+    net user sshuser Z123hasan /add
+    echo Adding sshuser to Administrators group...
+    net localgroup administrators sshuser /add
+) else (
+    echo User sshuser already exists.
+)
+
+:: =========================
+:: Finished
+:: =========================
+echo.
+echo =======================================
+echo ✅ All tasks completed successfully in ONE attempt!
+echo =======================================
+pause

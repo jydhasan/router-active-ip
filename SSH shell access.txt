@@ -55,3 +55,9 @@ net user
 net user username /delete
 example
 net user testuser /delete
+
+
+--------------
+old key remove
+ssh-keygen -f C:\Users\zahid\.ssh\known_hosts -R localhost
+ssh sshuser@localhost
