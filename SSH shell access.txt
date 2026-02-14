@@ -1,0 +1,57 @@
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+Get-Service sshd
+
+to connect 
+ssh localhost
+or ssh ip address
+PS C:\WINDOWS\system32> ssh localhost
+zahid@localhost's password:
+
+to stop service
+Stop-Service sshd
+Set-Service -Name sshd -StartupType Disabled
+
+then agian to start
+Set-Service -Name sshd -StartupType Automatic
+Start-Service sshd
+
+-----------------
+new user create
+# নতুন user বানান
+net user sshuser Z123hasan /add
+
+# Administrator group এ add করুন (optional)
+net localgroup administrators sshuser /add
+
+
+check all users--
+current user password change
+net user zahid NewPassword123
+-----------
+net user
+Get-LocalUser
+net user sshuser
+net localgroup administrators
+
+----------------
+windows new user password set
+net user username newpassword
+
+------------------
+we can get access from ubuntu to windows and windows to ubuntu 
+ssh sshuser@172.28.0.1 
+, first I need to seart ssh server on ubuntu by using this 
+sudo apt update
+sudo apt install openssh-server
+sudo service ssh start
+sudo service ssh status
+now test
+ssh jydhasan@localhost
+
+now user delete
+--------------------
+net user
+net user username /delete
+example
+net user testuser /delete
