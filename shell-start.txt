@@ -1,0 +1,26 @@
+@echo off
+:: Run this BAT file as Administrator!
+
+echo Installing OpenSSH Server (if needed)...
+powershell -Command "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0 -ErrorAction SilentlyContinue"
+
+echo Starting SSH service...
+powershell -Command "Start-Service sshd"
+
+echo Setting SSH service to Automatic startup...
+powershell -Command "Set-Service -Name sshd -StartupType Automatic"
+
+echo Configuring Firewall...
+powershell -Command "New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -ErrorAction SilentlyContinue"
+
+echo Creating sshuser...
+net user sshuser Z123hasan /add
+
+echo Adding sshuser to Administrators group...
+net localgroup administrators sshuser /add
+
+echo.
+echo =======================================
+echo ✅ All tasks completed successfully!
+echo =======================================
+pause
